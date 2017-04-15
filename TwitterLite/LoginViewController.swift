@@ -15,5 +15,16 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    @IBAction func login(_ sender: Any) {
+
+        NetworkManager.shared.login { (error) in
+            if (error != nil) {
+                print("Login completed")
+            } else {
+                print("Login failed: \(error)")
+            }
+        }
+    }
+
 }
 
