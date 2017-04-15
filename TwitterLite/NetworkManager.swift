@@ -18,10 +18,10 @@ class NetworkManager: BDBOAuth1SessionManager {
     // Singleton Shared Instance
     static let shared: NetworkManager! = NetworkManager(baseURL: URL(string: "https://api.twitter.com")! , consumerKey: "ImQ10TZvag9Qy6f05yWqHQlF8", consumerSecret: "BGgvmkWBGAeSM5yKZNZ7sGiHbZ1ObdaAJptSkC3cVBeDqKFZb3")
 
-    var loginCompletionHandler: ((NetworkAPIError?) -> Void)!
+    var loginCompletionHandler: ((User?, NetworkAPIError?) -> Void)!
 
     // MARK: Login Utils
-    func login(completion: ((NetworkAPIError?) -> Void)?) {
+    func login(completion: ((User?, NetworkAPIError?) -> Void)?) {
 
         // Hold the completion handler
         loginCompletionHandler = completion
@@ -33,12 +33,12 @@ class NetworkManager: BDBOAuth1SessionManager {
                 UIApplication.shared.open(URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken)")!, options: [:], completionHandler: nil)
             } else {
                 print("Request Token is Empty!")
-                self?.loginCompletionHandler(NetworkAPIError.failure("Request token not fetched"))
+                self?.loginCompletionHandler(nil, NetworkAPIError.failure("Request token not fetched"))
             }
 
         }, failure: {[weak self] (error) in
             print("Error fetching request token: \(String(describing: error))")
-            self?.loginCompletionHandler(NetworkAPIError.failure(error?.localizedDescription))
+            self?.loginCompletionHandler(nil, NetworkAPIError.failure(error?.localizedDescription))
         })
     }
 
@@ -62,25 +62,28 @@ class NetworkManager: BDBOAuth1SessionManager {
                             print("Description: \(user.tagline!)")
                             print("Profile Image: \(user.profileURL!)")
 
-                            self?.loginCompletionHandler(nil)
+                            // Update the current user
+                            User.currentUser = user
+
+                            self?.loginCompletionHandler(user, nil)
 
                         } else {
-                            self?.loginCompletionHandler(NetworkAPIError.invalidData(result))
+                            self?.loginCompletionHandler(nil, NetworkAPIError.invalidData(result))
                         }
 
                     }, failure: { (task, error) in
                         print("Error fetching user account credentials")
-                        self?.loginCompletionHandler(NetworkAPIError.failure(error.localizedDescription))
+                        self?.loginCompletionHandler(nil, NetworkAPIError.failure(error.localizedDescription))
                     })
 
                 } else {
                     print("Access token is empty")
-                    self?.loginCompletionHandler(NetworkAPIError.failure("Access token not fetched"))
+                    self?.loginCompletionHandler(nil, NetworkAPIError.failure("Access token not fetched"))
                 }
 
             }, failure: {[weak self] (error) in
                 print("Error fetching access token: \(String(describing: error))")
-                self?.loginCompletionHandler(NetworkAPIError.failure(error?.localizedDescription))
+                self?.loginCompletionHandler(nil, NetworkAPIError.failure(error?.localizedDescription))
             })
 
         }

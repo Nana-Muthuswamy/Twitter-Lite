@@ -53,10 +53,60 @@
                             <constraint firstItem="Daf-fH-dvK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SB5-z2-FOR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="1Xj-at-q9b" kind="presentation" identifier="ShowTweetsView" id="Ja0-DV-VkP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="138.98050974512745"/>
+        </scene>
+        <!--Tweets View Controller-->
+        <scene sceneID="VvH-8g-0W1">
+            <objects>
+                <tableViewController id="B9b-7F-0fh" customClass="TweetsViewController" customModule="TwitterLite" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dEc-2z-Ks9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="k7h-Ry-iFu">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k7h-Ry-iFu" id="Vpc-P2-tJ5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="B9b-7F-0fh" id="G13-A5-dWk"/>
+                            <outlet property="delegate" destination="B9b-7F-0fh" id="ueI-9T-9fx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="aTv-Zi-jFP"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qSo-Gi-wur" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BZU-iA-RtI">
+            <objects>
+                <navigationController storyboardIdentifier="TweetsNavController" automaticallyAdjustsScrollViewInsets="NO" id="1Xj-at-q9b" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YOY-36-g96">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="B9b-7F-0fh" kind="relationship" relationship="rootViewController" id="ebE-la-CZ1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="edT-hf-EJO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="941.60000000000002" y="138.98050974512745"/>
         </scene>
     </scenes>
     <resources>

@@ -17,12 +17,15 @@ class LoginViewController: UIViewController {
 
     @IBAction func login(_ sender: Any) {
 
-        NetworkManager.shared.login { (error) in
+        NetworkManager.shared.login { (user, error) in
 
             let alertMsg: String?
 
-            if (error == nil) {
+            if (user != nil && error == nil) {
                 print("Login completed")
+                DispatchQueue.main.async {[weak self] in
+                    self?.performSegue(withIdentifier: "ShowTweetsView", sender: self)
+                }
             } else {
                 print("Login failed: \(String(describing: error?.localizedDescription))")
 
