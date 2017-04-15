@@ -84,9 +84,19 @@
                             <outlet property="delegate" destination="B9b-7F-0fh" id="ueI-9T-9fx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="aTv-Zi-jFP"/>
+                    <navigationItem key="navigationItem" id="aTv-Zi-jFP">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="uNL-iB-YEk">
+                            <connections>
+                                <action selector="signOut:" destination="B9b-7F-0fh" id="QeK-oN-Q0w"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="arX-0s-7Px" kind="unwind" identifier="unwindToLoginViewWithSegue" unwindAction="unwindToLoginViewWithSegue:" id="6Sf-9J-C8P"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSo-Gi-wur" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="arX-0s-7Px" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1684" y="139"/>
         </scene>

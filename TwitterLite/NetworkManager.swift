@@ -20,16 +20,22 @@ class NetworkManager: BDBOAuth1SessionManager {
 
     var loginCompletionHandler: ((User?, NetworkAPIError?) -> Void)!
 
-    // MARK: Login Utils
+    // MARK: Login
     func login(completion: ((User?, NetworkAPIError?) -> Void)?) {
 
         // Hold the completion handler
         loginCompletionHandler = completion
 
-        NetworkManager.shared?.fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: URL(string: "twitterlite://login") , scope: nil, success: {[weak self] (authCredential) in
+        // Deauthorize (recommended approach due to OAuth bug)
+        deauthorize()
+
+        // Fetch Request Token for user
+        fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: URL(string: "twitterlite://login") , scope: nil, success: {[weak self] (authCredential) in
 
             if let requestToken = authCredential?.token {
                 print("Request Token: \(requestToken)")
+
+                // Load Authorize URL in default browser
                 UIApplication.shared.open(URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken)")!, options: [:], completionHandler: nil)
             } else {
                 print("Request Token is Empty!")
@@ -46,12 +52,14 @@ class NetworkManager: BDBOAuth1SessionManager {
 
         if let queryStr = url.query, let authCredential = BDBOAuth1Credential(queryString: queryStr) {
 
-            NetworkManager.shared.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: authCredential, success: {[weak self] (authCredential) in
+            // Fetch Access Token for the authorized user
+            fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: authCredential, success: {[weak self] (authCredential) in
 
                 if let accessToken = authCredential?.token {
                     print("Access Token: \(accessToken)")
 
-                    NetworkManager.shared.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, result) in
+                    // Fetch user's account profile
+                    self?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, result) in
 
                         if let userDict = result as? Dictionary<String, Any> {
                             let user = User(dictionary: userDict)
@@ -65,6 +73,7 @@ class NetworkManager: BDBOAuth1SessionManager {
                             // Update the current user
                             User.currentUser = user
 
+                            // Successful login completion
                             self?.loginCompletionHandler(user, nil)
 
                         } else {
@@ -87,6 +96,14 @@ class NetworkManager: BDBOAuth1SessionManager {
             })
 
         }
+    }
+
+    // MARK: Logout
+    func logout() {
+        // Clear the current user
+        User.currentUser = nil
+        // Deauthorize the app
+        deauthorize()
     }
 
     // MARK: Fetch User Details

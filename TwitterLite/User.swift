@@ -61,7 +61,7 @@ class User {
             let defaults = UserDefaults.standard
 
             if _currentUser == nil {
-                defaults.set(nil, forKey: "currentUser")
+                defaults.removeObject(forKey: "currentUser")
             } else {
                 let userData = try! JSONSerialization.data(withJSONObject: newUser?.dictionary as Any, options: [])
                 defaults.set(userData, forKey: "currentUser")

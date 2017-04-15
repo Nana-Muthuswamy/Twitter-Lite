@@ -16,6 +16,14 @@ class TweetsViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func signOut(_ sender: Any) {
+        NetworkManager.shared.logout()
+
+        DispatchQueue.main.async { [weak self] in
+            self?.performSegue(withIdentifier: "unwindToLoginViewWithSegue", sender: self)
+        }
+    }
+
     /*
     // MARK: - Navigation
 

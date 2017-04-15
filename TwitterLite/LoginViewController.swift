@@ -15,6 +15,14 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if User.currentUser != nil {
+            performSegue(withIdentifier: "ShowTweetsView", sender: self)
+        }
+    }
+
     @IBAction func login(_ sender: Any) {
 
         NetworkManager.shared.login { (user, error) in
@@ -25,7 +33,7 @@ class LoginViewController: UIViewController {
                 print("Login completed")
                 DispatchQueue.main.async {[weak self] in
                     self?.performSegue(withIdentifier: "ShowTweetsView", sender: self)
-                }
+                }                
             } else {
                 print("Login failed: \(String(describing: error?.localizedDescription))")
 
@@ -35,10 +43,14 @@ class LoginViewController: UIViewController {
                 }
 
                 let alert = UIAlertController(title: "Login Failed", message: alertMsg, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
         }
     }
 
+    @IBAction func unwindToLoginView(segue: UIStoryboardSegue) {
+        print("User Signed out")
+    }
 }
 
