@@ -18,10 +18,21 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: Any) {
 
         NetworkManager.shared.login { (error) in
-            if (error != nil) {
+
+            let alertMsg: String?
+
+            if (error == nil) {
                 print("Login completed")
             } else {
-                print("Login failed: \(error)")
+                print("Login failed: \(String(describing: error?.localizedDescription))")
+
+                switch error! {
+                case .failure(let errMsg): alertMsg = errMsg
+                case .invalidData(_): alertMsg = "Authentication failed or unable to fetch user info."
+                }
+
+                let alert = UIAlertController(title: "Login Failed", message: alertMsg, preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

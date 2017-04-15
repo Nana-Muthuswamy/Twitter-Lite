@@ -4,7 +4,7 @@ TwitterLite is an iOS app developed in Swift 3. It makes use of OAuth to provide
 
 TwitterLite is a basic twitter app to read and compose tweets from the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: 3 hours spent in total
 
 ## User Stories
 
