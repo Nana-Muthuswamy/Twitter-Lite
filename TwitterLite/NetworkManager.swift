@@ -21,7 +21,7 @@ class NetworkManager: BDBOAuth1SessionManager {
     var loginCompletionHandler: ((User?, NetworkAPIError?) -> Void)!
 
     // MARK: Login
-    func login(completion: ((User?, NetworkAPIError?) -> Void)?) {
+    func login(completion: @escaping ((User?, NetworkAPIError?) -> Void)) {
 
         // Hold the completion handler
         loginCompletionHandler = completion
@@ -33,17 +33,13 @@ class NetworkManager: BDBOAuth1SessionManager {
         fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: URL(string: "twitterlite://login") , scope: nil, success: {[weak self] (authCredential) in
 
             if let requestToken = authCredential?.token {
-                print("Request Token: \(requestToken)")
-
                 // Load Authorize URL in default browser
                 UIApplication.shared.open(URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken)")!, options: [:], completionHandler: nil)
             } else {
-                print("Request Token is Empty!")
                 self?.loginCompletionHandler(nil, NetworkAPIError.failure("Request token not fetched"))
             }
 
         }, failure: {[weak self] (error) in
-            print("Error fetching request token: \(String(describing: error))")
             self?.loginCompletionHandler(nil, NetworkAPIError.failure(error?.localizedDescription))
         })
     }
@@ -55,43 +51,15 @@ class NetworkManager: BDBOAuth1SessionManager {
             // Fetch Access Token for the authorized user
             fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: authCredential, success: {[weak self] (authCredential) in
 
-                if let accessToken = authCredential?.token {
-                    print("Access Token: \(accessToken)")
+                if (authCredential?.token) != nil {
 
-                    // Fetch user's account profile
-                    self?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, result) in
-
-                        if let userDict = result as? Dictionary<String, Any> {
-                            let user = User(dictionary: userDict)
-
-                            print("User Account credentials:")
-                            print("Name: \(user.name!)")
-                            print("Screen Name: \(user.screenName!)")
-                            print("Description: \(user.tagline!)")
-                            print("Profile Image: \(user.profileURL!)")
-
-                            // Update the current user
-                            User.currentUser = user
-
-                            // Successful login completion
-                            self?.loginCompletionHandler(user, nil)
-
-                        } else {
-                            self?.loginCompletionHandler(nil, NetworkAPIError.invalidData(result))
-                        }
-
-                    }, failure: { (task, error) in
-                        print("Error fetching user account credentials")
-                        self?.loginCompletionHandler(nil, NetworkAPIError.failure(error.localizedDescription))
-                    })
+                    self?.fetchUserAccount(completion: (self?.loginCompletionHandler)!)
 
                 } else {
-                    print("Access token is empty")
                     self?.loginCompletionHandler(nil, NetworkAPIError.failure("Access token not fetched"))
                 }
-
+                
             }, failure: {[weak self] (error) in
-                print("Error fetching access token: \(String(describing: error))")
                 self?.loginCompletionHandler(nil, NetworkAPIError.failure(error?.localizedDescription))
             })
 
@@ -108,4 +76,31 @@ class NetworkManager: BDBOAuth1SessionManager {
 
     // MARK: Fetch User Details
 
+    func fetchUserAccount(completion: @escaping ((User?, NetworkAPIError?) -> Void)) {
+
+        // Fetch user's account profile
+        self.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, result) in
+
+            if let userDict = result as? Dictionary<String, Any> {
+                let user = User(dictionary: userDict)
+
+                print("Name: \(user.name!)")
+                print("Screen Name: \(user.screenName!)")
+                print("Description: \(user.tagline!)")
+                print("Profile Image: \(user.profileURL!)")
+
+                // Update the current user
+                User.currentUser = user
+
+                // Successful login completion
+                completion(user, nil)
+
+            } else {
+                completion(nil, NetworkAPIError.invalidData(result))
+            }
+
+        }, failure: { (task, error) in
+            completion(nil, NetworkAPIError.failure(error.localizedDescription))
+        })
+    }
 }

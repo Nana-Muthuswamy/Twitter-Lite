@@ -30,13 +30,10 @@ class LoginViewController: UIViewController {
             let alertMsg: String?
 
             if (user != nil && error == nil) {
-                print("Login completed")
                 DispatchQueue.main.async {[weak self] in
                     self?.performSegue(withIdentifier: "ShowTweetsView", sender: self)
                 }                
             } else {
-                print("Login failed: \(String(describing: error?.localizedDescription))")
-
                 switch error! {
                 case .failure(let errMsg): alertMsg = errMsg
                 case .invalidData(_): alertMsg = "Authentication failed or unable to fetch user info."
