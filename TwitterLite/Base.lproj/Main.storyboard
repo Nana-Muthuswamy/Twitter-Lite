@@ -103,21 +103,38 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sqO-oR-fP8">
-                                            <rect key="frame" x="81" y="65" width="145" height="20"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="sqO-oR-fP8">
+                                            <rect key="frame" x="81" y="65" width="225" height="20"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aMn-81-ptM">
-                                                    <rect key="frame" x="0.0" y="2" width="62.5" height="16"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9xu-0d-VHS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Retweet" translatesAutoresizingMaskIntoConstraints="NO" id="1a3-JX-bbK">
-                                                            <rect key="frame" x="0.0" y="0.5" width="20" height="15"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xnc-YL-ynk" customClass="FaveButton" customModule="FaveButton">
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="15" id="4Un-Ej-hVw"/>
-                                                                <constraint firstAttribute="width" constant="20" id="cNy-I1-EZ3"/>
+                                                                <constraint firstAttribute="height" constant="20" id="W82-fU-nNj"/>
+                                                                <constraint firstAttribute="width" constant="20" id="ePu-k2-9oB"/>
                                                             </constraints>
-                                                        </imageView>
+                                                            <state key="normal" image="Reply"/>
+                                                            <connections>
+                                                                <segue destination="2Oo-BR-ntX" kind="show" identifier="ShowRetweetView" id="9Dk-Lk-7kM"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aMn-81-ptM">
+                                                    <rect key="frame" x="60" y="0.0" width="62.5" height="20"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNa-B5-I97" customClass="FaveButton" customModule="FaveButton">
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="OYo-Uv-k8M"/>
+                                                                <constraint firstAttribute="height" constant="20" id="tpq-qV-HOI"/>
+                                                            </constraints>
+                                                            <state key="normal" image="Retweet"/>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjq-vl-vkY">
-                                                            <rect key="frame" x="28" y="0.0" width="34.5" height="16"/>
+                                                            <rect key="frame" x="28" y="2" width="34.5" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" red="0.50493481419999997" green="0.50993416879999998" blue="0.50993416879999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -125,15 +142,16 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hsl-VM-UHj">
-                                                    <rect key="frame" x="82.5" y="0.0" width="62.5" height="20"/>
+                                                    <rect key="frame" x="162.5" y="0.0" width="62.5" height="20"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Favorite" translatesAutoresizingMaskIntoConstraints="NO" id="c3j-nC-vQJ">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Q6-8t-k5Q" customClass="FaveButton" customModule="FaveButton">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="7Ui-kf-o13"/>
-                                                                <constraint firstAttribute="width" constant="20" id="aAI-pQ-oGK"/>
+                                                                <constraint firstAttribute="height" constant="20" id="GHw-BK-uSN"/>
+                                                                <constraint firstAttribute="width" constant="20" id="Gcu-Nf-oif"/>
                                                             </constraints>
-                                                        </imageView>
+                                                            <state key="normal" image="Favorite"/>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIO-G8-V1B">
                                                             <rect key="frame" x="28" y="2" width="34.5" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -189,7 +207,11 @@
                                 <action selector="signOut:" destination="B9b-7F-0fh" id="QeK-oN-Q0w"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="Compose" id="mQb-A1-yjs"/>
+                        <barButtonItem key="rightBarButtonItem" image="Compose" id="mQb-A1-yjs">
+                            <connections>
+                                <segue destination="HBQ-J7-wn3" kind="show" identifier="ShowNewTweetView" id="s8a-Dg-6I0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="arX-0s-7Px" kind="unwind" identifier="unwindToLoginView" unwindAction="unwindToLoginViewWithSegue:" id="6Sf-9J-C8P"/>
@@ -199,6 +221,24 @@
                 <exit id="arX-0s-7Px" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1684" y="138.98050974512745"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="UHl-Rd-2T4">
+            <objects>
+                <viewController id="HBQ-J7-wn3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wFc-wK-5bR"/>
+                        <viewControllerLayoutGuide type="bottom" id="fN9-53-VBf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1SU-Fm-e8r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lj9-Je-gNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1702" y="-570"/>
         </scene>
         <!--Tweet Details View Controller-->
         <scene sceneID="iWO-Fn-0BZ">
@@ -216,7 +256,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTh-We-EA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2470" y="142"/>
+            <point key="canvasLocation" x="2478" y="139"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="uiG-CF-kKa">
+            <objects>
+                <viewController id="2Oo-BR-ntX" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Igw-HT-5wW"/>
+                        <viewControllerLayoutGuide type="bottom" id="ntb-ek-o5Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2gX-Nd-XWY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OmS-BL-tRh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="832"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BZU-iA-RtI">
@@ -239,8 +297,9 @@
     </scenes>
     <resources>
         <image name="Compose" width="22" height="22"/>
-        <image name="Favorite" width="14" height="14"/>
-        <image name="Retweet" width="14" height="14"/>
+        <image name="Favorite" width="24" height="24"/>
+        <image name="Reply" width="24" height="24"/>
+        <image name="Retweet" width="24" height="24"/>
         <image name="Twitter120" width="120" height="120"/>
     </resources>
 </document>
