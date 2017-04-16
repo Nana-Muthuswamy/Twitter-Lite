@@ -189,7 +189,7 @@
                                 <action selector="signOut:" destination="B9b-7F-0fh" id="QeK-oN-Q0w"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="mQb-A1-yjs"/>
+                        <barButtonItem key="rightBarButtonItem" image="Compose" id="mQb-A1-yjs"/>
                     </navigationItem>
                     <connections>
                         <segue destination="arX-0s-7Px" kind="unwind" identifier="unwindToLoginView" unwindAction="unwindToLoginViewWithSegue:" id="6Sf-9J-C8P"/>
@@ -238,6 +238,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Compose" width="22" height="22"/>
         <image name="Favorite" width="14" height="14"/>
         <image name="Retweet" width="14" height="14"/>
         <image name="Twitter120" width="120" height="120"/>

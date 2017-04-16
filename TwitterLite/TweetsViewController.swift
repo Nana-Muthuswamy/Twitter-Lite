@@ -21,6 +21,9 @@ class TweetsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Setup title view
+        navigationItem.titleView = UIImageView(image: UIImage(named: "TwitterIcon"))
+
         // Setup table view attributes
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 94
