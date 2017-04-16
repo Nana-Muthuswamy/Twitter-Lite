@@ -26,25 +26,6 @@ class Tweet {
         return _displayDateFormatter
     }
 
-    var displayTimeStamp: String {
-
-        if var timeInterval = timeStamp?.timeIntervalSinceNow {
-
-            timeInterval *= -1
-
-            if timeInterval < 3600 {
-                return "\(Int(timeInterval/60))m"
-            } else if timeInterval < 86400 {
-                return "\(Int(timeInterval/1440))h"
-            } else {
-                return Tweet.displayDateFormatter.string(from: timeStamp!)
-            }
-
-        } else {
-            return ""
-        }
-    }
-
     init(dictionary: Dictionary<String, Any>) {
 
         text = dictionary["text"] as? String

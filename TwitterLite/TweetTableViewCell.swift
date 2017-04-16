@@ -26,7 +26,7 @@ class TweetTableViewCell: UITableViewCell {
             }
             nameLabel.text = model.user?.name
             screenNameLabel.text = model.user?.screenName
-            timestampLabel.text = model.displayTimeStamp
+            timestampLabel.text = model.timeStamp?.relativeValue
             tweetTextLabel.text = model.text
             retweetCountLabel.text = "\(model.retweetCount)"
             favoriteCountLabel.text = "\(model.favoritesCount)"
