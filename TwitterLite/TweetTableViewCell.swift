@@ -15,7 +15,6 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
-    @IBOutlet weak var replyCountLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
 
@@ -27,7 +26,7 @@ class TweetTableViewCell: UITableViewCell {
             }
             nameLabel.text = model.user?.name
             screenNameLabel.text = model.user?.screenName
-            timestampLabel.text = "10m"
+            timestampLabel.text = model.displayTimeStamp
             tweetTextLabel.text = model.text
             retweetCountLabel.text = "\(model.retweetCount)"
             favoriteCountLabel.text = "\(model.favoritesCount)"

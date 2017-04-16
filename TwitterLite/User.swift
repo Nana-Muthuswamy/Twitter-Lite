@@ -27,7 +27,7 @@ class User {
         }
 
         if let userScreenName = dictionary["screen_name"] as? String {
-            screenName = userScreenName
+            screenName = "@" + userScreenName
         }
 
         if let profileURLPath = dictionary["profile_image_url"] as? String {

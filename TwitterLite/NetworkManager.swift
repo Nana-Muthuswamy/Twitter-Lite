@@ -111,6 +111,7 @@ class NetworkManager: BDBOAuth1SessionManager {
     func fetchHomeTimeline(completion: @escaping (Array<Tweet>?, NetworkAPIError?) -> Void) {
 
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task, response) in
+            print("HomeTimeLine 1: \(response)")
 
             var tweets = Array<Tweet>()
 
