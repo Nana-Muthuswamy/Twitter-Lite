@@ -8,7 +8,7 @@ target 'TwitterLite' do
   # Pods for TwitterLite
 
     pod 'BDBOAuth1Manager'
-    pod 'MBProgressHUD'
     pod 'AFNetworking'
+    pod 'FaveButton'
 
 end

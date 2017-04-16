@@ -14,7 +14,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MBProgressHUD.xcscheme</key>
+		<key>FaveButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,12 +27,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
+		<key>7C08227B6E14D87F0F5B0FD6DFFA1A3E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8016284EA47377C618BCE7FFBC250AA0</key>
+		<key>81E4940361AAF9B092FDF04C6ADB8A42</key>
 		<dict>
 			<key>primary</key>
 			<true/>
