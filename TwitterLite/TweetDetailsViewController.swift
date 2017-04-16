@@ -43,8 +43,8 @@ class TweetDetailsViewController: UIViewController {
             favoritesCountLabel.text = String(format: "%d", tweetInfo.favoritesCount)
 
             replyButton.isSelected = false
-            retweetButton.isSelected = false
-            favoriteButton.isSelected = false
+            retweetButton.isSelected = tweetInfo.retweeted
+            favoriteButton.isSelected = tweetInfo.favorited
         }
     }
 
@@ -52,5 +52,36 @@ class TweetDetailsViewController: UIViewController {
     }
 
     @IBAction func favorite(_ sender: FaveButton) {
+        NetworkManager.shared.favorite(tweetID: tweet.idStr, favorite: sender.isSelected) { [weak self] (tweet, error) in
+            if error == nil {
+                print(sender.isSelected ? "Favorited!" : "UnFavorited")
+                self?.tweet.favorited = sender.isSelected
+            } else {
+                self?.displayAlert(title: "Unable to Perform Operation", message: error?.localizedDescription ?? "Remote API failed due to unknown reason.")
+                self?.executeOnMain({self?.favoriteButton.isSelected = (sender.isSelected ? false : true)})
+            }
+
+            self?.executeOnMain({self?.favoritesCountLabel.text = String(format: "%d", self?.tweet.favoritesCount ?? 0)})
+        }
+    }
+
+    // MARK: - Utils
+
+    fileprivate func displayAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+
+        DispatchQueue.main.async {[weak self] in
+            let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                completion?()
+            }))
+
+            self?.present(alertVC, animated: true, completion: nil)
+        }
+    }
+
+    fileprivate func executeOnMain(_ block: (() -> Void)?) {
+        DispatchQueue.main.async {
+            block?()
+        }
     }
 }

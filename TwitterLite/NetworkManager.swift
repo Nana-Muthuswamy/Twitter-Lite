@@ -13,6 +13,11 @@ enum NetworkAPIError: Error {
     case failure(String?)
 }
 
+fileprivate let retweetURL = "1.1/statuses/retweet/"
+fileprivate let unRetweetURL = "1.1/statuses/destroy/"
+fileprivate let favoriteURL = "1.1/favorites/create.json"
+fileprivate let unFavoriteURL = "1.1/favorites/destroy.json"
+
 class NetworkManager: BDBOAuth1SessionManager {
 
     // Singleton Shared Instance
@@ -20,7 +25,7 @@ class NetworkManager: BDBOAuth1SessionManager {
 
     var loginCompletionHandler: ((User?, NetworkAPIError?) -> Void)!
 
-    // MARK: Login
+    // MARK: - Login & Logout
 
     func login(completion: @escaping ((User?, NetworkAPIError?) -> Void)) {
 
@@ -67,8 +72,6 @@ class NetworkManager: BDBOAuth1SessionManager {
         }
     }
 
-    // MARK: Logout
-
     func logout() {
         // Clear the current user
         User.currentUser = nil
@@ -76,7 +79,7 @@ class NetworkManager: BDBOAuth1SessionManager {
         deauthorize()
     }
 
-    // MARK: Fetch User Account
+    // MARK: - Fetch Methods
 
     func fetchUserAccount(completion: @escaping ((User?, NetworkAPIError?) -> Void)) {
 
@@ -106,8 +109,6 @@ class NetworkManager: BDBOAuth1SessionManager {
         })
     }
 
-    // MARK: Home Timeline
-
     func fetchHomeTimeline(completion: @escaping (Array<Tweet>?, NetworkAPIError?) -> Void) {
 
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task, response) in
@@ -122,6 +123,34 @@ class NetworkManager: BDBOAuth1SessionManager {
                 completion(nil, NetworkAPIError.invalidData(response))
             }
 
+        }) { (task, error) in
+            completion(nil, NetworkAPIError.failure(error.localizedDescription))
+        }
+    }
+
+    // MARK: - Retweeting
+
+    // MARK: - Favoriting
+
+    func favorite(tweetID: String, favorite: Bool, completion: @escaping (Tweet?, Error?) -> ()) {
+
+        let params = ["id" : tweetID]
+
+        var endpoint : String
+
+        if favorite {
+            endpoint = favoriteURL
+        }else{
+            endpoint = unFavoriteURL
+        }
+
+        post(endpoint, parameters: params, progress: nil, success: { (task, response) in
+            if let tweetDict = response as? Dictionary<String, Any> {
+                let tweet = Tweet(dictionary: tweetDict)
+                completion(tweet, nil)
+            } else {
+                completion(nil, NetworkAPIError.invalidData(response))
+            }
         }) { (task, error) in
             completion(nil, NetworkAPIError.failure(error.localizedDescription))
         }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FaveButton
 
 class TweetTableViewCell: UITableViewCell {
 
@@ -16,7 +17,9 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var retweetButton: FaveButton!
     @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var favoriteButton: FaveButton!
 
     var model: Tweet! {
         didSet {
@@ -29,7 +32,9 @@ class TweetTableViewCell: UITableViewCell {
             timestampLabel.text = model.timeStamp?.relativeValue
             tweetTextLabel.text = model.text
             retweetCountLabel.text = "\(model.retweetCount)"
+            retweetButton.isSelected = model.retweeted
             favoriteCountLabel.text = "\(model.favoritesCount)"
+            favoriteButton.isSelected = model.favorited
         }
     }
 }

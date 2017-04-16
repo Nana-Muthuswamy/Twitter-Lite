@@ -185,9 +185,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="favoriteButton" destination="7Q6-8t-k5Q" id="OUR-le-Ltv"/>
                                     <outlet property="favoriteCountLabel" destination="xIO-G8-V1B" id="uBt-dS-qOM"/>
                                     <outlet property="nameLabel" destination="TlA-HK-uJU" id="hob-Th-DU3"/>
                                     <outlet property="profileImageView" destination="2PT-5R-K1u" id="zW1-26-luD"/>
+                                    <outlet property="retweetButton" destination="bNa-B5-I97" id="3bO-UV-ABl"/>
                                     <outlet property="retweetCountLabel" destination="Xjq-vl-vkY" id="VRX-5z-YSr"/>
                                     <outlet property="screenNameLabel" destination="Nfx-bc-wM6" id="L4E-OU-LoC"/>
                                     <outlet property="timestampLabel" destination="kXs-xi-aW0" id="Lp6-ju-lnB"/>
