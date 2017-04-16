@@ -25,8 +25,22 @@ class TweetsViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 94
 
+        // Setup UIRefresh
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+
         // Load twitter home time line of tweets...
+        loadData()
+    }
+
+    // MARK: Data
+
+    func loadData() {
+
         NetworkManager.shared.fetchHomeTimeline { [weak self] (results, error) in
+
+            self?.refreshControl?.endRefreshing()
+
             if error == nil && results != nil {
                 self?.tweets = results!
             } else if error != nil {
