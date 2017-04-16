@@ -33,7 +33,7 @@ class TweetsViewController: UITableViewController {
         loadData()
     }
 
-    // MARK: Data
+    // MARK: - Data
 
     func loadData() {
 
@@ -62,14 +62,14 @@ class TweetsViewController: UITableViewController {
         }
     }
 
-    // MARK: Action Methods
+    // MARK: - Action Methods
 
     @IBAction func signOut(_ sender: Any) {
         NetworkManager.shared.logout()
         performSegue(withIdentifier: "unwindToLoginView", sender: self)
     }
 
-    // MARK UITableViewDataSource
+    // MARK - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
@@ -83,17 +83,18 @@ class TweetsViewController: UITableViewController {
         return cell
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
-    // MARK: Utils
+        if segue.identifier == "ShowTweetDetailsView" {
+            let tweetDetailsVC = segue.destination as! TweetDetailsViewController
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
+            tweetDetailsVC.tweet = tweets[indexPath.row]
+        }
+    }
+
+    // MARK: - Utils
 
     fileprivate func displayAlert(title: String, message: String, completion: (() -> Void)?) {
 

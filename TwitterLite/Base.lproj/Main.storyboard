@@ -180,6 +180,7 @@
                                     <outlet property="screenNameLabel" destination="Nfx-bc-wM6" id="L4E-OU-LoC"/>
                                     <outlet property="timestampLabel" destination="kXs-xi-aW0" id="Lp6-ju-lnB"/>
                                     <outlet property="tweetTextLabel" destination="3cP-bl-Iva" id="x4c-EN-vzj"/>
+                                    <segue destination="7ML-Io-UMK" kind="show" identifier="ShowTweetDetailsView" id="JTg-dk-WEU"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -204,6 +205,24 @@
                 <exit id="arX-0s-7Px" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1684" y="138.98050974512745"/>
+        </scene>
+        <!--Tweet Details View Controller-->
+        <scene sceneID="iWO-Fn-0BZ">
+            <objects>
+                <viewController id="7ML-Io-UMK" customClass="TweetDetailsViewController" customModule="TwitterLite" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vNn-tw-3Fn"/>
+                        <viewControllerLayoutGuide type="bottom" id="EiL-Fw-tMr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pkz-BN-PCn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTh-We-EA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2470" y="142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BZU-iA-RtI">
