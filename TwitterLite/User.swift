@@ -46,7 +46,7 @@ class User {
 
             if _currentUser == nil {
                 // TDO: Should use DispatchSemaphore to initiate login and fetch user details when not persisted
-                if let userData = UserDefaults.standard.data(forKey: "currentUser") {
+                if let userData = UserDefaults.standard.data(forKey: "userData") {
                     let userDict = try! JSONSerialization.jsonObject(with: userData, options: []) as! Dictionary<String, Any>
                     _currentUser = User(dictionary: userDict)
                 }
@@ -61,10 +61,10 @@ class User {
             let defaults = UserDefaults.standard
 
             if _currentUser == nil {
-                defaults.removeObject(forKey: "currentUser")
+                defaults.removeObject(forKey: "userData")
             } else {
                 let userData = try! JSONSerialization.data(withJSONObject: newUser?.dictionary as Any, options: [])
-                defaults.set(userData, forKey: "currentUser")
+                defaults.set(userData, forKey: "userData")
             }
 
             defaults.synchronize()

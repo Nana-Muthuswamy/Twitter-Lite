@@ -21,6 +21,7 @@ class NetworkManager: BDBOAuth1SessionManager {
     var loginCompletionHandler: ((User?, NetworkAPIError?) -> Void)!
 
     // MARK: Login
+
     func login(completion: @escaping ((User?, NetworkAPIError?) -> Void)) {
 
         // Hold the completion handler
@@ -67,6 +68,7 @@ class NetworkManager: BDBOAuth1SessionManager {
     }
 
     // MARK: Logout
+
     func logout() {
         // Clear the current user
         User.currentUser = nil
@@ -74,14 +76,14 @@ class NetworkManager: BDBOAuth1SessionManager {
         deauthorize()
     }
 
-    // MARK: Fetch User Details
+    // MARK: Fetch User Account
 
     func fetchUserAccount(completion: @escaping ((User?, NetworkAPIError?) -> Void)) {
 
         // Fetch user's account profile
-        self.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, result) in
+        self.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, response) in
 
-            if let userDict = result as? Dictionary<String, Any> {
+            if let userDict = response as? Dictionary<String, Any> {
                 let user = User(dictionary: userDict)
 
                 print("Name: \(user.name!)")
@@ -96,11 +98,31 @@ class NetworkManager: BDBOAuth1SessionManager {
                 completion(user, nil)
 
             } else {
-                completion(nil, NetworkAPIError.invalidData(result))
+                completion(nil, NetworkAPIError.invalidData(response))
             }
 
         }, failure: { (task, error) in
             completion(nil, NetworkAPIError.failure(error.localizedDescription))
         })
+    }
+
+    // MARK: Home Timeline
+
+    func fetchHomeTimeline(completion: @escaping (Array<Tweet>?, NetworkAPIError?) -> Void) {
+
+        get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task, response) in
+
+            var tweets = Array<Tweet>()
+
+            if let arrayOfTweets = response as? Array<Dictionary<String, Any>> {
+                tweets = Tweet.tweets(dictionaries: arrayOfTweets)
+                completion(tweets, nil)
+            } else {
+                completion(nil, NetworkAPIError.invalidData(response))
+            }
+
+        }) { (task, error) in
+            completion(nil, NetworkAPIError.failure(error.localizedDescription))
+        }
     }
 }
