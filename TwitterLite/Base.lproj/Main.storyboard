@@ -22,36 +22,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="Daf-fH-dvK">
-                                <rect key="frame" x="67" y="148.5" width="240" height="370"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TwitterLite" translatesAutoresizingMaskIntoConstraints="NO" id="e58-tO-AKc">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="240" id="HXX-Ae-NMj"/>
-                                            <constraint firstAttribute="width" constant="240" id="rYP-7h-7BI"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5La-vu-WWQ">
-                                        <rect key="frame" x="0.0" y="320" width="240" height="50"/>
-                                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="DwY-Py-KGl"/>
-                                        </constraints>
-                                        <state key="normal" title="Login to TwitterLite">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WIG-Ws-0Gq"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Twitter120" translatesAutoresizingMaskIntoConstraints="NO" id="VPW-hJ-lWl">
+                                <rect key="frame" x="127" y="273.5" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="DwF-Oa-Xs6"/>
+                                    <constraint firstAttribute="width" constant="120" id="kfk-HC-sWT"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ym-Mt-IBS">
+                                <rect key="frame" x="114" y="443.5" width="147" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Login to TwitterLite">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MQ2-vc-FAw"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.34901960780000002" green="0.67843137249999996" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Daf-fH-dvK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OKT-5G-mxL"/>
-                            <constraint firstItem="Daf-fH-dvK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SB5-z2-FOR"/>
+                            <constraint firstItem="2ym-Mt-IBS" firstAttribute="top" secondItem="VPW-hJ-lWl" secondAttribute="bottom" constant="50" id="4h4-G9-Im4"/>
+                            <constraint firstItem="VPW-hJ-lWl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AMF-tg-asa"/>
+                            <constraint firstItem="VPW-hJ-lWl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Cdu-J2-1qe"/>
+                            <constraint firstItem="2ym-Mt-IBS" firstAttribute="centerX" secondItem="VPW-hJ-lWl" secondAttribute="centerX" id="b6H-Yr-v3C"/>
                         </constraints>
                     </view>
                     <connections>
@@ -244,8 +238,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Favorite" width="225" height="225"/>
-        <image name="Retweet" width="144" height="91"/>
-        <image name="TwitterLite" width="249" height="202"/>
+        <image name="Favorite" width="14" height="14"/>
+        <image name="Retweet" width="14" height="14"/>
+        <image name="Twitter120" width="120" height="120"/>
     </resources>
 </document>
