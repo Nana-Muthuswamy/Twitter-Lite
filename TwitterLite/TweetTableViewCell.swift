@@ -9,7 +9,14 @@
 import UIKit
 import FaveButton
 
+protocol TweetTableViewCellDelegate: class {
+    func tableViewCell(_ cell: TweetTableViewCell, didRetweet: Bool)
+    func tableViewCell(_ cell: TweetTableViewCell, didFavorite: Bool)
+}
+
 class TweetTableViewCell: UITableViewCell {
+
+    weak var delegate: TweetTableViewCellDelegate?
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -52,4 +59,13 @@ class TweetTableViewCell: UITableViewCell {
             replyButton.isSelected = false
         }
     }
+
+    @IBAction func retweet(_ sender: FaveButton) {
+        delegate?.tableViewCell(self, didRetweet: sender.isSelected)
+    }
+
+    @IBAction func favorite(_ sender: FaveButton) {
+        delegate?.tableViewCell(self, didFavorite: sender.isSelected)
+    }
+
 }

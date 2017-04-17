@@ -81,6 +81,7 @@ class TweetsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell") as! TweetTableViewCell
+        cell.delegate = self
         cell.model = tweets[indexPath.row]
 
         return cell
@@ -101,13 +102,55 @@ class TweetsViewController: UITableViewController {
 
     fileprivate func displayAlert(title: String, message: String, completion: (() -> Void)?) {
 
-        DispatchQueue.main.async {[weak self] in
+        executeOnMain { 
             let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
                 completion?()
             }))
 
-            self?.present(alertVC, animated: true, completion: nil)
+            self.present(alertVC, animated: true, completion: nil)
+        }
+    }
+
+    fileprivate func executeOnMain(_ block: (() -> Void)?) {
+        DispatchQueue.main.async {
+            block?()
+        }
+    }
+
+}
+
+extension TweetsViewController: TweetTableViewCellDelegate {
+
+    func tableViewCell(_ cell: TweetTableViewCell, didRetweet: Bool) {
+
+        let indexPath = tableView.indexPath(for: cell)!
+        let tweet = tweets[indexPath.row]
+
+        NetworkManager.shared.retweet(tweetID: tweet.idStr, retweet: didRetweet) {[weak self] (_, error) in
+
+            if error == nil {
+                tweet.retweeted = didRetweet
+                self?.executeOnMain({self?.tableView.reloadData()})
+            } else {
+                self?.displayAlert(title: "Unable to Perform Operation", message: error?.localizedDescription ?? "Remote API failed due to unknown reason.", completion: nil)
+            }
+        }
+    }
+
+    func tableViewCell(_ cell: TweetTableViewCell, didFavorite: Bool) {
+
+        let indexPath = tableView.indexPath(for: cell)!
+        let tweet = tweets[indexPath.row]
+
+        NetworkManager.shared.favorite(tweetID: tweet.idStr, favorite: didFavorite) { [weak self] (_, error) in
+
+            if error == nil {
+                tweet.favorited = didFavorite
+                self?.executeOnMain({self?.tableView.reloadData()})
+            } else {
+                self?.displayAlert(title: "Unable to Perform Operation", message: error?.localizedDescription ?? "Remote API failed due to unknown reason.", completion: nil)
+            }
         }
     }
 }

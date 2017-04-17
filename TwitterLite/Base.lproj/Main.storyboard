@@ -132,6 +132,9 @@
                                                                 <constraint firstAttribute="height" constant="20" id="tpq-qV-HOI"/>
                                                             </constraints>
                                                             <state key="normal" image="Retweet"/>
+                                                            <connections>
+                                                                <action selector="retweet:" destination="k7h-Ry-iFu" eventType="touchUpInside" id="yDD-W2-4Nv"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjq-vl-vkY">
                                                             <rect key="frame" x="28" y="2" width="34.5" height="16"/>
@@ -151,6 +154,9 @@
                                                                 <constraint firstAttribute="width" constant="20" id="Gcu-Nf-oif"/>
                                                             </constraints>
                                                             <state key="normal" image="Favorite"/>
+                                                            <connections>
+                                                                <action selector="favorite:" destination="k7h-Ry-iFu" eventType="touchUpInside" id="bmQ-pr-dsJ"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIO-G8-V1B">
                                                             <rect key="frame" x="28" y="2" width="34.5" height="16"/>
