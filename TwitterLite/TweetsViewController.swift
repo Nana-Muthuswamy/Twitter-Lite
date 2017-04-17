@@ -95,6 +95,10 @@ class TweetsViewController: UITableViewController {
             let tweetDetailsVC = segue.destination as! TweetDetailsViewController
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             tweetDetailsVC.tweet = tweets[indexPath.row]
+
+        } else if segue.identifier == "ShowComposeTweetView" {
+            let composeTweetVC = (segue.destination as! UINavigationController).viewControllers.first as! ComposeTweetViewController
+            composeTweetVC.delegate = self
         }
     }
 
@@ -118,6 +122,13 @@ class TweetsViewController: UITableViewController {
         }
     }
 
+}
+
+extension TweetsViewController: ComposeTweetViewControllerDelegate {
+    func updateTimeline(with newTweet: Tweet) {
+        tweets.insert(newTweet, at: 0)
+        executeOnMain({self.tableView.reloadData()})
+    }
 }
 
 extension TweetsViewController: TweetTableViewCellDelegate {

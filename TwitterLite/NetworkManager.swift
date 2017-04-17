@@ -18,6 +18,7 @@ fileprivate let retweetURL = "1.1/statuses/retweet/<tweetId>.json"
 fileprivate let unRetweetURL = "1.1/statuses/unretweet/<tweetId>.json"
 fileprivate let favoriteURL = "1.1/favorites/create.json"
 fileprivate let unFavoriteURL = "1.1/favorites/destroy.json"
+private var updateStatusURL = "1.1/statuses/update.json"
 
 class NetworkManager: BDBOAuth1SessionManager {
 
@@ -176,6 +177,27 @@ class NetworkManager: BDBOAuth1SessionManager {
                 completion(nil, NetworkAPIError.invalidData(response))
             }
         }) { (task, error) in
+            completion(nil, NetworkAPIError.failure(error.localizedDescription))
+        }
+    }
+
+    // MARK: - Tweeting
+
+    func tweet(text: String, replyToStatusId: String?, completion: @escaping (Tweet?, Error?) -> ()) {
+
+        var params = ["status" : text]
+
+        if replyToStatusId != nil {
+            params["in_reply_to_status_id"] = replyToStatusId
+        }
+
+        post(updateStatusURL, parameters: params, progress: nil, success: { (_, response) in
+            if let responseDict = response as? Dictionary<String, Any> {
+                completion(Tweet(dictionary: responseDict), nil)
+            } else {
+                completion(nil, NetworkAPIError.invalidData(response))
+            }
+        }) { (_, error) in
             completion(nil, NetworkAPIError.failure(error.localizedDescription))
         }
     }
