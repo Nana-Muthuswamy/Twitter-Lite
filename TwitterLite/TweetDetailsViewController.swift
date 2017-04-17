@@ -22,6 +22,9 @@ class TweetDetailsViewController: UIViewController {
     @IBOutlet weak var retweetButton: FaveButton!
     @IBOutlet weak var favoriteButton: FaveButton!
 
+    @IBOutlet weak var retweetUserNameLabel: UILabel!
+    @IBOutlet weak var retweetedStackViewHeightConstraint: NSLayoutConstraint!
+
     var tweet: Tweet!
 
     override func viewDidLoad() {
@@ -29,39 +32,59 @@ class TweetDetailsViewController: UIViewController {
 
         print("Tweet: \(tweet)")
 
-        if let tweetInfo = tweet {
+        if tweet.retweeted {
+            retweetUserNameLabel.text = tweet.retweetedUserName
+            retweetedStackViewHeightConstraint.constant = 20.0
 
-            if let url = tweetInfo.user?.profileURL {
-                profileImageView.setImageWith(url)
-            }
-
-            nameLabel.text = tweetInfo.user?.name
-            screenNameLabel.text = tweetInfo.user?.screenName
-            tweetTextLabel.text = tweetInfo.text
-            timestampLabel.text = tweetInfo.timeStamp?.readableValue
-            retweetsCountLabel.text = String(format: "%d", tweetInfo.retweetCount)
-            favoritesCountLabel.text = String(format: "%d", tweetInfo.favoritesCount)
-
-            replyButton.isSelected = false
-            retweetButton.isSelected = tweetInfo.retweeted
-            favoriteButton.isSelected = tweetInfo.favorited
+        } else {
+            retweetUserNameLabel.text = nil
+            retweetedStackViewHeightConstraint.constant = 0.0
         }
+
+        if let url = tweet.tweetOwner?.profileURL {
+            profileImageView.setImageWith(url)
+        }
+
+        nameLabel.text = tweet.tweetOwner?.name
+        screenNameLabel.text = tweet.tweetOwner?.screenName
+        tweetTextLabel.text = tweet.text
+        timestampLabel.text = tweet.timeStamp?.readableValue
+        retweetsCountLabel.text = String(format: "%d", tweet.retweetCount)
+        favoritesCountLabel.text = String(format: "%d", tweet.favoritesCount)
+
+        replyButton.isSelected = false
+        retweetButton.isSelected = tweet.retweeted
+        favoriteButton.isSelected = tweet.favorited
     }
 
     @IBAction func retweet(_ sender: FaveButton) {
+
+        NetworkManager.shared.retweet(tweetID: tweet.idStr, retweet: sender.isSelected) {[weak self] (_, error) in
+
+            if error == nil {
+                self?.tweet.retweeted = sender.isSelected
+                self?.executeOnMain({
+                    self?.retweetsCountLabel.text = String(format: "%d", self?.tweet.retweetCount ?? 0)
+                    self?.retweetInfo(display: sender.isSelected)
+                })
+            } else {
+                self?.executeOnMain({self?.retweetButton.isSelected = (sender.isSelected ? false : true)})
+                self?.displayAlert(title: "Unable to Perform Operation", message: error?.localizedDescription ?? "Remote API failed due to unknown reason.")
+            }
+        }
     }
 
     @IBAction func favorite(_ sender: FaveButton) {
-        NetworkManager.shared.favorite(tweetID: tweet.idStr, favorite: sender.isSelected) { [weak self] (tweet, error) in
-            if error == nil {
-                print(sender.isSelected ? "Favorited!" : "UnFavorited")
-                self?.tweet.favorited = sender.isSelected
-            } else {
-                self?.displayAlert(title: "Unable to Perform Operation", message: error?.localizedDescription ?? "Remote API failed due to unknown reason.")
-                self?.executeOnMain({self?.favoriteButton.isSelected = (sender.isSelected ? false : true)})
-            }
 
-            self?.executeOnMain({self?.favoritesCountLabel.text = String(format: "%d", self?.tweet.favoritesCount ?? 0)})
+        NetworkManager.shared.favorite(tweetID: tweet.idStr, favorite: sender.isSelected) { [weak self] (_, error) in
+
+            if error == nil {
+                self?.tweet.favorited = sender.isSelected
+                self?.executeOnMain({self?.favoritesCountLabel.text = String(format: "%d", self?.tweet.favoritesCount ?? 0)})
+            } else {
+                self?.executeOnMain({self?.favoriteButton.isSelected = (sender.isSelected ? false : true)})
+                self?.displayAlert(title: "Unable to Perform Operation", message: error?.localizedDescription ?? "Remote API failed due to unknown reason.")
+            }
         }
     }
 
@@ -82,6 +105,17 @@ class TweetDetailsViewController: UIViewController {
     fileprivate func executeOnMain(_ block: (() -> Void)?) {
         DispatchQueue.main.async {
             block?()
+        }
+    }
+
+    fileprivate func retweetInfo(display: Bool) {
+
+        if display {
+            self.retweetedStackViewHeightConstraint.constant = 20.0
+            self.retweetUserNameLabel.text = User.currentUser?.name
+        } else {
+            self.retweetedStackViewHeightConstraint.constant = 0
+            self.retweetUserNameLabel.text = nil
         }
     }
 }

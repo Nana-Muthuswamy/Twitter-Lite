@@ -18,7 +18,7 @@ extension Date {
 
     var relativeValue: String {
 
-        let timeInterval = round(abs(self.timeIntervalSinceNow))
+        let timeInterval = Int(abs(self.timeIntervalSinceNow))
 
         if timeInterval < 60 {
             return "\(timeInterval)s"
@@ -29,7 +29,7 @@ extension Date {
         } else {
 
             let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, h:mm a"
+            formatter.dateFormat = "MMM d"
             return formatter.string(from: self)
         }
     }

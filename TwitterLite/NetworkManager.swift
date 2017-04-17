@@ -13,8 +13,9 @@ enum NetworkAPIError: Error {
     case failure(String?)
 }
 
-fileprivate let retweetURL = "1.1/statuses/retweet/"
-fileprivate let unRetweetURL = "1.1/statuses/destroy/"
+private var statusURL = "1.1/statuses/show/<tweetId>.json?include_my_retweet=1"
+fileprivate let retweetURL = "1.1/statuses/retweet/<tweetId>.json"
+fileprivate let unRetweetURL = "1.1/statuses/unretweet/<tweetId>.json"
 fileprivate let favoriteURL = "1.1/favorites/create.json"
 fileprivate let unFavoriteURL = "1.1/favorites/destroy.json"
 
@@ -112,7 +113,7 @@ class NetworkManager: BDBOAuth1SessionManager {
     func fetchHomeTimeline(completion: @escaping (Array<Tweet>?, NetworkAPIError?) -> Void) {
 
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task, response) in
-            print("HomeTimeLine 1: \(response)")
+            print("HomeTimeLine 1: \(String(describing: response))")
 
             var tweets = Array<Tweet>()
 
@@ -130,13 +131,36 @@ class NetworkManager: BDBOAuth1SessionManager {
 
     // MARK: - Retweeting
 
+    func retweet(tweetID: String, retweet: Bool, completion: @escaping (Tweet?, Error?) -> ()) {
+
+        let endPoint: String
+
+        if retweet {
+            endPoint = retweetURL.replacingOccurrences(of: "<tweetId>", with: tweetID)
+        } else {
+            endPoint = unRetweetURL.replacingOccurrences(of: "<tweetId>", with: tweetID)
+        }
+
+        post(endPoint, parameters: nil, progress: nil, success: { (task, response) in
+
+            if let responseDict = response as? Dictionary<String, Any> {
+                completion(Tweet(dictionary: responseDict), nil)
+            } else {
+                completion(nil, NetworkAPIError.invalidData(response))
+            }
+        }, failure: { (task, error) in
+            completion(nil, NetworkAPIError.failure(error.localizedDescription))
+        })
+    }
+
+
     // MARK: - Favoriting
 
     func favorite(tweetID: String, favorite: Bool, completion: @escaping (Tweet?, Error?) -> ()) {
 
         let params = ["id" : tweetID]
 
-        var endpoint : String
+        let endpoint : String
 
         if favorite {
             endpoint = favoriteURL

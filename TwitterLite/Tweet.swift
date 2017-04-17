@@ -14,7 +14,7 @@ class Tweet {
     var idStr: String
     var text: String?
     var timeStamp: Date?
-    var user: User?
+    var tweetOwner: User?
     var retweetCount: Int = 0
     var retweeted: Bool {
         didSet {
@@ -36,14 +36,9 @@ class Tweet {
         }
     }
 
-    fileprivate static var _displayDateFormatter: DateFormatter!
-    static var displayDateFormatter: DateFormatter {
-        if _displayDateFormatter == nil {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM dd"
-            _displayDateFormatter = formatter
-        }
-        return _displayDateFormatter
+    // TDO: Need cleanup based on retweeted status model
+    var retweetedUserName: String? {
+        return User.currentUser?.name
     }
 
     init(dictionary: Dictionary<String, Any>) {
@@ -63,7 +58,7 @@ class Tweet {
         }
 
         if let userDict = dictionary["user"] as? Dictionary<String,Any> {
-            self.user = User(dictionary: userDict)
+            self.tweetOwner = User(dictionary: userDict)
         }
     }
 
