@@ -10,18 +10,22 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    // MARK: - View Controller Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         if User.currentUser != nil {
-            performSegue(withIdentifier: "ShowTweetsView", sender: self)
+            presentAppContainerController()
         }
     }
+
+    // MARK: - Action Methods
 
     @IBAction func login(_ sender: Any) {
 
@@ -31,8 +35,8 @@ class LoginViewController: UIViewController {
 
             if (user != nil && error == nil) {
                 DispatchQueue.main.async {[weak self] in
-                    self?.performSegue(withIdentifier: "ShowTweetsView", sender: self)
-                }                
+                    self?.presentAppContainerController()
+                }
             } else {
                 switch error! {
                 case .failure(let errMsg): alertMsg = errMsg
@@ -48,6 +52,20 @@ class LoginViewController: UIViewController {
 
     @IBAction func unwindToLoginView(segue: UIStoryboardSegue) {
         print("User Signed out")
+    }
+
+    // MARK: - Utils
+
+    private func presentAppContainerController() {
+        // Setup AppSideBarController's SideBarViewController and vice versa
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let appSideBarController = storyboard.instantiateViewController(withIdentifier: "AppSideBarController") as! AppSideBarController
+        let sideBarVC = storyboard.instantiateViewController(withIdentifier: "SideBarViewController") as! SideBarViewController
+
+        sideBarVC.sideBarController = appSideBarController
+        appSideBarController.sideBarViewController = sideBarVC
+
+        present(appSideBarController, animated: true, completion: nil)
     }
 }
 
