@@ -75,7 +75,7 @@ class TweetsViewController: UITableViewController {
         performSegue(withIdentifier: "unwindToLoginView", sender: self)
     }
 
-    // MARK - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
@@ -88,6 +88,16 @@ class TweetsViewController: UITableViewController {
         cell.model = tweets[indexPath.row]
 
         return cell
+    }
+
+    // MARK: - UITableViewDelegate
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let cell = tableView.cellForRow(at: indexPath) as? TweetTableViewCell
+        performSegue(withIdentifier: "ShowTweetDetailsView", sender: cell)
     }
 
     // MARK: - Navigation

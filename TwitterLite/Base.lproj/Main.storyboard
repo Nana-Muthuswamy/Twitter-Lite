@@ -84,6 +84,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="arX-0s-7Px" kind="unwind" identifier="unwindToLoginView" unwindAction="unwindToLoginViewWithSegue:" id="6Sf-9J-C8P"/>
+                        <segue destination="7ML-Io-UMK" kind="show" identifier="ShowTweetDetailsView" id="2i8-vg-Ykr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSo-Gi-wur" userLabel="First Responder" sceneMemberID="firstResponder"/>
