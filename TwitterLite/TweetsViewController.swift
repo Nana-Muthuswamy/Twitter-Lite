@@ -28,6 +28,9 @@ class TweetsViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 94
 
+        let tableCellViewNib = UINib(nibName: "TweetTableViewCell", bundle: nil)
+        tableView.register(tableCellViewNib, forCellReuseIdentifier: "TweetTableViewCell")
+
         // Setup UIRefresh
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)

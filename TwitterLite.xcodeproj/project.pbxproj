@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		390E53081EA1F91E00AF8F06 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390E53071EA1F91E00AF8F06 /* NetworkManager.swift */; };
+		391460631EAACFD900A7F4FF /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391460621EAACFD900A7F4FF /* TweetTableViewCell.xib */; };
 		398A35001EA1CB61006F3BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A34FF1EA1CB61006F3BCD /* AppDelegate.swift */; };
 		398A35021EA1CB61006F3BCD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A35011EA1CB61006F3BCD /* LoginViewController.swift */; };
 		398A35051EA1CB61006F3BCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 398A35031EA1CB61006F3BCD /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		390E53071EA1F91E00AF8F06 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		391460621EAACFD900A7F4FF /* TweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetTableViewCell.xib; sourceTree = "<group>"; };
 		398A34FC1EA1CB61006F3BCD /* TwitterLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398A34FF1EA1CB61006F3BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398A35011EA1CB61006F3BCD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				39D94B3D1EA2FBEC00EE8676 /* TweetTableViewCell.swift */,
+				391460621EAACFD900A7F4FF /* TweetTableViewCell.xib */,
 				398A35031EA1CB61006F3BCD /* Main.storyboard */,
 				398A35081EA1CB61006F3BCD /* LaunchScreen.storyboard */,
 			);
@@ -218,6 +221,7 @@
 				398A350A1EA1CB61006F3BCD /* LaunchScreen.storyboard in Resources */,
 				398A35071EA1CB61006F3BCD /* Assets.xcassets in Resources */,
 				398A35051EA1CB61006F3BCD /* Main.storyboard in Resources */,
+				391460631EAACFD900A7F4FF /* TweetTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
