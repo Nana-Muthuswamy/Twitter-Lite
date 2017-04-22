@@ -12,6 +12,7 @@
 		391460651EAADB8300A7F4FF /* AppSideBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391460641EAADB8300A7F4FF /* AppSideBarController.swift */; };
 		391460671EAAE2A900A7F4FF /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391460661EAAE2A900A7F4FF /* SideBarViewController.swift */; };
 		3914606B1EABC94800A7F4FF /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914606A1EABC94800A7F4FF /* TimelineViewController.swift */; };
+		3914606D1EABCEE200A7F4FF /* MentionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914606C1EABCEE200A7F4FF /* MentionsViewController.swift */; };
 		398A35001EA1CB61006F3BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A34FF1EA1CB61006F3BCD /* AppDelegate.swift */; };
 		398A35021EA1CB61006F3BCD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A35011EA1CB61006F3BCD /* LoginViewController.swift */; };
 		398A35051EA1CB61006F3BCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 398A35031EA1CB61006F3BCD /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		391460641EAADB8300A7F4FF /* AppSideBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSideBarController.swift; sourceTree = "<group>"; };
 		391460661EAAE2A900A7F4FF /* SideBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
 		3914606A1EABC94800A7F4FF /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		3914606C1EABCEE200A7F4FF /* MentionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsViewController.swift; sourceTree = "<group>"; };
 		398A34FC1EA1CB61006F3BCD /* TwitterLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398A34FF1EA1CB61006F3BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398A35011EA1CB61006F3BCD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -86,11 +88,9 @@
 		390E53041EA1F83A00AF8F06 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				398A35011EA1CB61006F3BCD /* LoginViewController.swift */,
-				391460641EAADB8300A7F4FF /* AppSideBarController.swift */,
-				391460661EAAE2A900A7F4FF /* SideBarViewController.swift */,
-				39D94B391EA291CD00EE8676 /* TweetsViewController.swift */,
+				3914606E1EABCEF600A7F4FF /* Common */,
 				3914606A1EABC94800A7F4FF /* TimelineViewController.swift */,
+				3914606C1EABCEE200A7F4FF /* MentionsViewController.swift */,
 				39D94B3F1EA3597100EE8676 /* TweetDetailsViewController.swift */,
 				39D94B481EA487BB00EE8676 /* ComposeTweetViewController.swift */,
 			);
@@ -115,6 +115,17 @@
 				398A350B1EA1CB61006F3BCD /* Info.plist */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		3914606E1EABCEF600A7F4FF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				398A35011EA1CB61006F3BCD /* LoginViewController.swift */,
+				391460641EAADB8300A7F4FF /* AppSideBarController.swift */,
+				391460661EAAE2A900A7F4FF /* SideBarViewController.swift */,
+				39D94B391EA291CD00EE8676 /* TweetsViewController.swift */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		398A34F31EA1CB61006F3BCD = {
@@ -294,6 +305,7 @@
 				39D94B381EA212B600EE8676 /* User.swift in Sources */,
 				390E53081EA1F91E00AF8F06 /* NetworkManager.swift in Sources */,
 				39D94B3C1EA2D91100EE8676 /* Tweet.swift in Sources */,
+				3914606D1EABCEE200A7F4FF /* MentionsViewController.swift in Sources */,
 				39D94B401EA3597100EE8676 /* TweetDetailsViewController.swift in Sources */,
 				398A35021EA1CB61006F3BCD /* LoginViewController.swift in Sources */,
 				391460671EAAE2A900A7F4FF /* SideBarViewController.swift in Sources */,

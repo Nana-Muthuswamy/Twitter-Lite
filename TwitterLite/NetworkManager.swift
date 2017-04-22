@@ -13,12 +13,16 @@ enum NetworkAPIError: Error {
     case failure(String?)
 }
 
-private var statusURL = "1.1/statuses/show/<tweetId>.json?include_my_retweet=1"
+fileprivate let userAccountURL = "1.1/account/verify_credentials.json"
+fileprivate let timelineURL = "1.1/statuses/home_timeline.json"
+fileprivate let mentionsURL = "1.1/statuses/mentions_timeline.json"
 fileprivate let retweetURL = "1.1/statuses/retweet/<tweetId>.json"
 fileprivate let unRetweetURL = "1.1/statuses/unretweet/<tweetId>.json"
 fileprivate let favoriteURL = "1.1/favorites/create.json"
 fileprivate let unFavoriteURL = "1.1/favorites/destroy.json"
-private var updateStatusURL = "1.1/statuses/update.json"
+fileprivate let updateStatusURL = "1.1/statuses/update.json"
+fileprivate let statusURL = "1.1/statuses/show/<tweetId>.json?include_my_retweet=1"
+
 
 class NetworkManager: BDBOAuth1SessionManager {
 
@@ -86,7 +90,7 @@ class NetworkManager: BDBOAuth1SessionManager {
     func fetchUserAccount(completion: @escaping ((User?, NetworkAPIError?) -> Void)) {
 
         // Fetch user's account profile
-        self.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, response) in
+        self.get(userAccountURL, parameters: nil, progress: nil, success: { (task, response) in
 
             if let userDict = response as? Dictionary<String, Any> {
                 let user = User(dictionary: userDict)
@@ -113,7 +117,26 @@ class NetworkManager: BDBOAuth1SessionManager {
 
     func fetchHomeTimeline(completion: @escaping (Array<Tweet>?, NetworkAPIError?) -> Void) {
 
-        get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task, response) in
+        get(timelineURL, parameters: nil, progress: nil, success: { (task, response) in
+            print("HomeTimeLine 1: \(String(describing: response))")
+
+            var tweets = Array<Tweet>()
+
+            if let arrayOfTweets = response as? Array<Dictionary<String, Any>> {
+                tweets = Tweet.tweets(dictionaries: arrayOfTweets)
+                completion(tweets, nil)
+            } else {
+                completion(nil, NetworkAPIError.invalidData(response))
+            }
+
+        }) { (task, error) in
+            completion(nil, NetworkAPIError.failure(error.localizedDescription))
+        }
+    }
+
+    func fetchMentionsTimeline(completion: @escaping (Array<Tweet>?, NetworkAPIError?) -> Void) {
+
+        get(mentionsURL, parameters: nil, progress: nil, success: { (task, response) in
             print("HomeTimeLine 1: \(String(describing: response))")
 
             var tweets = Array<Tweet>()
