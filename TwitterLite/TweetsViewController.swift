@@ -12,24 +12,32 @@ class TweetsViewController: UITableViewController {
 
     var tweets = Array<Tweet>() {
         didSet {
+            emptyTweetsView = (tweets.count == 0)
             DispatchQueue.main.async {[weak self] in
                 self?.tableView.reloadData()
             }
         }
     }
 
+    private var emptyTweetsView = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Setup title view
-        navigationItem.titleView = UIImageView(image: UIImage(named: "TwitterIcon"))
+        // Setup Navigation items
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"Compose")!, style: .plain, target: self, action: #selector(composeTweet(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut(_:)))
+
+
 
         // Setup table view attributes
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 94
 
-        let tableCellViewNib = UINib(nibName: "TweetTableViewCell", bundle: nil)
-        tableView.register(tableCellViewNib, forCellReuseIdentifier: "TweetTableViewCell")
+        let tweetCellViewNib = UINib(nibName: "TweetTableViewCell", bundle: nil)
+        tableView.register(tweetCellViewNib, forCellReuseIdentifier: "TweetTableViewCell")
+        let emptyTweetsCellViewNib = UINib(nibName: "EmptyTweetsTableViewCell", bundle: nil)
+        tableView.register(emptyTweetsCellViewNib, forCellReuseIdentifier: "EmptyTweetsTableViewCell")
 
         // Setup UIRefresh
         refreshControl = UIRefreshControl()
@@ -52,19 +60,31 @@ class TweetsViewController: UITableViewController {
         performSegue(withIdentifier: "unwindToLoginView", sender: self)
     }
 
+    @IBAction func composeTweet(_ sender: Any) {
+        performSegue(withIdentifier: "PresentComposeTweetView", sender: self)
+    }
+
     // MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tweets.count
+        return (emptyTweetsView ? 1 : tweets.count)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell") as! TweetTableViewCell
-        cell.delegate = self
-        cell.model = tweets[indexPath.row]
+        if emptyTweetsView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyTweetsTableViewCell") as! EmptyTweetsTableViewCell
+            cell.message = Message(title: "Nothing to see here. Yet.", body: "From Retweets to likes and a whole lot more, this is where all the action happens about your Tweets and followers. You'll like it here.")
 
-        return cell
+            return cell
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell") as! TweetTableViewCell
+            cell.delegate = self
+            cell.model = tweets[indexPath.row]
+
+            return cell
+        }
     }
 
     // MARK: - UITableViewDelegate
@@ -77,6 +97,14 @@ class TweetsViewController: UITableViewController {
         performSegue(withIdentifier: "ShowTweetDetailsView", sender: cell)
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if emptyTweetsView {
+            return 600
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
+
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -86,7 +114,7 @@ class TweetsViewController: UITableViewController {
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             tweetDetailsVC.tweet = tweets[indexPath.row]
 
-        } else if segue.identifier == "ShowComposeTweetView" {
+        } else if segue.identifier == "PresentComposeTweetView" {
             let composeTweetVC = (segue.destination as! UINavigationController).viewControllers.first as! ComposeTweetViewController
             composeTweetVC.delegate = self
         }

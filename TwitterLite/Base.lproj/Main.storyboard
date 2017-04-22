@@ -57,7 +57,7 @@
             </objects>
             <point key="canvasLocation" x="-783" y="139"/>
         </scene>
-        <!--Home-->
+        <!--Timeline-->
         <scene sceneID="VvH-8g-0W1">
             <objects>
                 <tableViewController restorationIdentifier="TimelineViewController" storyboardIdentifier="TimelineViewController" id="B9b-7F-0fh" customClass="TimelineViewController" customModule="TwitterLite" customModuleProvider="target" sceneMemberID="viewController">
@@ -70,21 +70,11 @@
                             <outlet property="delegate" destination="B9b-7F-0fh" id="ueI-9T-9fx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Home" id="aTv-Zi-jFP">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="uNL-iB-YEk">
-                            <connections>
-                                <action selector="signOut:" destination="B9b-7F-0fh" id="QeK-oN-Q0w"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="Compose" id="mQb-A1-yjs">
-                            <connections>
-                                <segue destination="mIa-Iy-m7N" kind="presentation" identifier="ShowComposeTweetView" id="s8a-Dg-6I0"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Timeline" id="aTv-Zi-jFP"/>
                     <connections>
-                        <segue destination="arX-0s-7Px" kind="unwind" identifier="unwindToLoginView" unwindAction="unwindToLoginViewWithSegue:" id="6Sf-9J-C8P"/>
                         <segue destination="7ML-Io-UMK" kind="show" identifier="ShowTweetDetailsView" id="2i8-vg-Ykr"/>
+                        <segue destination="mIa-Iy-m7N" kind="presentation" identifier="PresentComposeTweetView" id="SJC-s7-CeS"/>
+                        <segue destination="arX-0s-7Px" kind="unwind" identifier="unwindToLoginView" unwindAction="unwindToLoginViewWithSegue:" id="VSd-mt-uT8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSo-Gi-wur" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -568,7 +558,7 @@
             </objects>
             <point key="canvasLocation" x="898" y="139"/>
         </scene>
-        <!--Mentions View Controller-->
+        <!--Mentions-->
         <scene sceneID="qhb-Ln-c0O">
             <objects>
                 <tableViewController restorationIdentifier="MentionsViewController" storyboardIdentifier="MentionsViewController" id="xc4-Sa-n12" customClass="MentionsViewController" customModule="TwitterLite" customModuleProvider="target" sceneMemberID="viewController">
@@ -591,9 +581,15 @@
                             <outlet property="delegate" destination="xc4-Sa-n12" id="NdM-qY-nd5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="IDk-cG-lMO"/>
+                    <navigationItem key="navigationItem" title="Mentions" id="IDk-cG-lMO"/>
+                    <connections>
+                        <segue destination="7ML-Io-UMK" kind="show" identifier="ShowTweetDetailsView" id="c34-rX-GSW"/>
+                        <segue destination="mIa-Iy-m7N" kind="presentation" identifier="PresentComposeTweetView" id="eeR-qq-D85"/>
+                        <segue destination="EgB-Ib-Z9U" kind="unwind" identifier="unwindToLoginView" unwindAction="unwindToLoginViewWithSegue:" id="ytl-6E-rkG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1O7-et-nHV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EgB-Ib-Z9U" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2422" y="881"/>
         </scene>
@@ -653,7 +649,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Compose" width="22" height="22"/>
         <image name="Favorite" width="24" height="24"/>
         <image name="Reply" width="24" height="24"/>
         <image name="Retweet" width="24" height="24"/>
@@ -661,5 +656,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="x1A-2j-HD3"/>
+        <segue reference="c34-rX-GSW"/>
+        <segue reference="eeR-qq-D85"/>
     </inferredMetricsTieBreakers>
 </document>

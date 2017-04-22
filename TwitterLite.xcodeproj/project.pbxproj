@@ -13,6 +13,9 @@
 		391460671EAAE2A900A7F4FF /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391460661EAAE2A900A7F4FF /* SideBarViewController.swift */; };
 		3914606B1EABC94800A7F4FF /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914606A1EABC94800A7F4FF /* TimelineViewController.swift */; };
 		3914606D1EABCEE200A7F4FF /* MentionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914606C1EABCEE200A7F4FF /* MentionsViewController.swift */; };
+		391460721EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391460701EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift */; };
+		391460731EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391460711EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib */; };
+		391460751EABE11100A7F4FF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391460741EABE11100A7F4FF /* Message.swift */; };
 		398A35001EA1CB61006F3BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A34FF1EA1CB61006F3BCD /* AppDelegate.swift */; };
 		398A35021EA1CB61006F3BCD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A35011EA1CB61006F3BCD /* LoginViewController.swift */; };
 		398A35051EA1CB61006F3BCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 398A35031EA1CB61006F3BCD /* Main.storyboard */; };
@@ -35,6 +38,9 @@
 		391460661EAAE2A900A7F4FF /* SideBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
 		3914606A1EABC94800A7F4FF /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		3914606C1EABCEE200A7F4FF /* MentionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsViewController.swift; sourceTree = "<group>"; };
+		391460701EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyTweetsTableViewCell.swift; sourceTree = "<group>"; };
+		391460711EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTweetsTableViewCell.xib; sourceTree = "<group>"; };
+		391460741EABE11100A7F4FF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		398A34FC1EA1CB61006F3BCD /* TwitterLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398A34FF1EA1CB61006F3BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398A35011EA1CB61006F3BCD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +87,7 @@
 			children = (
 				39D94B371EA212B600EE8676 /* User.swift */,
 				39D94B3B1EA2D91100EE8676 /* Tweet.swift */,
+				391460741EABE11100A7F4FF /* Message.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -102,6 +109,8 @@
 			children = (
 				39D94B3D1EA2FBEC00EE8676 /* TweetTableViewCell.swift */,
 				391460621EAACFD900A7F4FF /* TweetTableViewCell.xib */,
+				391460701EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift */,
+				391460711EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib */,
 				398A35031EA1CB61006F3BCD /* Main.storyboard */,
 				398A35081EA1CB61006F3BCD /* LaunchScreen.storyboard */,
 			);
@@ -238,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				391460731EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib in Resources */,
 				398A350A1EA1CB61006F3BCD /* LaunchScreen.storyboard in Resources */,
 				398A35071EA1CB61006F3BCD /* Assets.xcassets in Resources */,
 				398A35051EA1CB61006F3BCD /* Main.storyboard in Resources */,
@@ -306,12 +316,14 @@
 				390E53081EA1F91E00AF8F06 /* NetworkManager.swift in Sources */,
 				39D94B3C1EA2D91100EE8676 /* Tweet.swift in Sources */,
 				3914606D1EABCEE200A7F4FF /* MentionsViewController.swift in Sources */,
+				391460721EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift in Sources */,
 				39D94B401EA3597100EE8676 /* TweetDetailsViewController.swift in Sources */,
 				398A35021EA1CB61006F3BCD /* LoginViewController.swift in Sources */,
 				391460671EAAE2A900A7F4FF /* SideBarViewController.swift in Sources */,
 				398A35001EA1CB61006F3BCD /* AppDelegate.swift in Sources */,
 				3914606B1EABC94800A7F4FF /* TimelineViewController.swift in Sources */,
 				391460651EAADB8300A7F4FF /* AppSideBarController.swift in Sources */,
+				391460751EABE11100A7F4FF /* Message.swift in Sources */,
 				39D94B3E1EA2FBEC00EE8676 /* TweetTableViewCell.swift in Sources */,
 				39D94B431EA3F1D900EE8676 /* Date+Extension.swift in Sources */,
 			);
