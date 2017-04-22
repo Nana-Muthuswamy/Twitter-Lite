@@ -10,7 +10,7 @@ import UIKit
 
 class TweetsViewController: UITableViewController {
 
-    fileprivate var tweets = Array<Tweet>() {
+    var tweets = Array<Tweet>() {
         didSet {
             DispatchQueue.main.async {[weak self] in
                 self?.tableView.reloadData()
@@ -42,30 +42,7 @@ class TweetsViewController: UITableViewController {
     // MARK: - Data
 
     func loadData() {
-
-        NetworkManager.shared.fetchHomeTimeline { [weak self] (results, error) in
-
-            self?.refreshControl?.endRefreshing()
-
-            if error == nil && results != nil {
-                self?.tweets = results!
-            } else if error != nil {
-
-                let alertTitle: String
-                let alertMsg: String
-
-                switch error! {
-                case .failure(let msg):
-                    alertTitle = "Network Error"
-                    alertMsg = msg ?? "Unable to fetch data."
-                case .invalidData(_):
-                    alertTitle = "Invalid Data"
-                    alertMsg = "Unexpected data format returned"
-                }
-
-                self?.displayAlert(title: alertTitle, message: alertMsg, completion: nil)
-            }
-        }
+        // default implementation does nothing, need to be overriden by sub classes
     }
 
     // MARK: - Action Methods
@@ -117,7 +94,7 @@ class TweetsViewController: UITableViewController {
 
     // MARK: - Utils
 
-    fileprivate func displayAlert(title: String, message: String, completion: (() -> Void)?) {
+    func displayAlert(title: String, message: String, completion: (() -> Void)?) {
 
         executeOnMain { 
             let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -129,7 +106,7 @@ class TweetsViewController: UITableViewController {
         }
     }
 
-    fileprivate func executeOnMain(_ block: (() -> Void)?) {
+    func executeOnMain(_ block: (() -> Void)?) {
         DispatchQueue.main.async {
             block?()
         }

@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(animated)
 
         if User.currentUser != nil {
-            presentAppContainerController()
+            performSegue(withIdentifier: "PresentAppSideBarContainer", sender: self)
         }
     }
 
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
 
             if (user != nil && error == nil) {
                 DispatchQueue.main.async {[weak self] in
-                    self?.presentAppContainerController()
+                    self?.performSegue(withIdentifier: "PresentAppSideBarContainer", sender: self)
                 }
             } else {
                 switch error! {
@@ -54,18 +54,21 @@ class LoginViewController: UIViewController {
         print("User Signed out")
     }
 
-    // MARK: - Utils
+    // MARK: Navigation
 
-    private func presentAppContainerController() {
-        // Setup AppSideBarController's SideBarViewController and vice versa
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let appSideBarController = storyboard.instantiateViewController(withIdentifier: "AppSideBarController") as! AppSideBarController
-        let sideBarVC = storyboard.instantiateViewController(withIdentifier: "SideBarViewController") as! SideBarViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PresentAppSideBarContainer" {
 
-        sideBarVC.sideBarController = appSideBarController
-        appSideBarController.sideBarViewController = sideBarVC
+            let appSideBarController = segue.destination as! AppSideBarController
 
-        present(appSideBarController, animated: true, completion: nil)
+            // Setup AppSideBarController's SideBarViewController and vice versa
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+
+            let sideBarVC = storyboard.instantiateViewController(withIdentifier: "SideBarViewController") as! SideBarViewController
+
+            sideBarVC.sideBarController = appSideBarController
+            appSideBarController.sideBarViewController = sideBarVC
+        }
     }
 }
 

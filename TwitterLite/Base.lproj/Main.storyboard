@@ -49,6 +49,9 @@
                             <constraint firstItem="2ym-Mt-IBS" firstAttribute="centerX" secondItem="VPW-hJ-lWl" secondAttribute="centerX" id="b6H-Yr-v3C"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="Tng-LR-9bT" kind="presentation" identifier="PresentAppSideBarContainer" id="cFh-VZ-eaW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,7 +60,7 @@
         <!--Home-->
         <scene sceneID="VvH-8g-0W1">
             <objects>
-                <tableViewController id="B9b-7F-0fh" customClass="TweetsViewController" customModule="TwitterLite" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="TimelineViewController" storyboardIdentifier="TimelineViewController" id="B9b-7F-0fh" customClass="TimelineViewController" customModule="TwitterLite" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" id="dEc-2z-Ks9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
