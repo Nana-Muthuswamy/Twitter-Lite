@@ -57,6 +57,8 @@ class TweetDetailsViewController: UIViewController {
         favoriteButton.isSelected = tweet.favorited
     }
 
+    // MARK: Action Methods
+
     @IBAction func retweet(_ sender: FaveButton) {
 
         NetworkManager.shared.retweet(tweetID: tweet.idStr, retweet: sender.isSelected) {[weak self] (_, error) in
@@ -87,6 +89,20 @@ class TweetDetailsViewController: UIViewController {
             }
         }
     }
+
+    @IBAction func tapProfileName(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "ShowProfileView", sender: self)
+    }
+
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowProfileView" {
+            let destination = segue.destination as! ProfileViewController
+            destination.user = tweet.tweetOwner!
+        }
+    }
+
 
     // MARK: - Utils
 

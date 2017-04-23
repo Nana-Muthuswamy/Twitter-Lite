@@ -242,6 +242,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fyt-bm-GFi" appends="YES" id="nuS-7X-vva"/>
+                                </connections>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Tweet Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9R-6W-mvb">
                                 <rect key="frame" x="16" y="173" width="343" height="20.5"/>
@@ -437,9 +441,15 @@
                         <outlet property="screenNameLabel" destination="AqQ-UA-cCg" id="tdB-CR-Rk4"/>
                         <outlet property="timestampLabel" destination="6d4-05-1FA" id="sfI-Bn-8Fb"/>
                         <outlet property="tweetTextLabel" destination="o9R-6W-mvb" id="FWD-EO-rVc"/>
+                        <segue destination="14p-VW-opz" kind="show" identifier="ShowProfileView" id="Xdb-pv-Ovm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTh-We-EA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fyt-bm-GFi">
+                    <connections>
+                        <action selector="tapProfileName:" destination="7ML-Io-UMK" id="ezd-gX-pSW"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3471" y="530"/>
         </scene>
@@ -710,6 +720,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="x1A-2j-HD3"/>
         <segue reference="5Yq-xl-hCO"/>
+        <segue reference="Xdb-pv-Ovm"/>
         <segue reference="GMS-UE-Zgb"/>
     </inferredMetricsTieBreakers>
 </document>
