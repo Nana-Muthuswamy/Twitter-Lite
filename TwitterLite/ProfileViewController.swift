@@ -19,17 +19,8 @@ class ProfileViewController: TweetsViewController {
         headerView.profile = user
 
         tableView.tableHeaderView = headerView
-
-        // Navigation item customization based on access point
-        if (navigationController?.viewControllers.first != self) {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(backButtonPressed))
-        }
     }
-
-    func backButtonPressed() {
-        navigationController?.popViewController(animated: true)
-    }
-
+    
     override func loadData() {
         
         NetworkManager.shared.fetchTimeline(forId: user.idStr, completion: { [weak self] (results, error) in

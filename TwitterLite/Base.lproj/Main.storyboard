@@ -65,16 +65,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="h92-qi-CCX">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h92-qi-CCX" id="ElW-lh-ufA">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="14p-VW-opz" id="U9a-zL-XZt"/>
                             <outlet property="delegate" destination="14p-VW-opz" id="xeY-i4-Bos"/>
@@ -611,16 +601,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="DKm-Wg-c8r">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DKm-Wg-c8r" id="837-L9-Ny8">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="xc4-Sa-n12" id="Nit-pL-5b8"/>
                             <outlet property="delegate" destination="xc4-Sa-n12" id="NdM-qY-nd5"/>
@@ -719,8 +699,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="x1A-2j-HD3"/>
-        <segue reference="5Yq-xl-hCO"/>
+        <segue reference="2i8-vg-Ykr"/>
+        <segue reference="SJC-s7-CeS"/>
         <segue reference="Xdb-pv-Ovm"/>
-        <segue reference="GMS-UE-Zgb"/>
     </inferredMetricsTieBreakers>
 </document>

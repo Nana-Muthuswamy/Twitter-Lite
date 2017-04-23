@@ -26,7 +26,10 @@ class TweetsViewController: UITableViewController {
 
         // Setup Navigation items
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"Compose")!, style: .plain, target: self, action: #selector(composeTweet(_:)))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut(_:)))
+
+        if (navigationController?.viewControllers.first == self) { // Include Sign Out button only for rootviewcontroller
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut(_:)))
+        }
 
         // Setup table view attributes
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -131,7 +134,7 @@ class TweetsViewController: UITableViewController {
 
     func displayAlert(title: String, message: String, completion: (() -> Void)?) {
 
-        executeOnMain { 
+        executeOnMain {
             let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
                 completion?()
