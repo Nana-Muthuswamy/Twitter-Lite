@@ -28,8 +28,6 @@ class TweetsViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"Compose")!, style: .plain, target: self, action: #selector(composeTweet(_:)))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut(_:)))
 
-
-
         // Setup table view attributes
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 94
@@ -120,6 +118,15 @@ class TweetsViewController: UITableViewController {
         }
     }
 
+    func showProfileView(for user: User) {
+
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let destination = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        destination.user = user
+
+        show(destination, sender: self)
+    }
+
     // MARK: - Utils
 
     func displayAlert(title: String, message: String, completion: (() -> Void)?) {
@@ -153,8 +160,7 @@ extension TweetsViewController: TweetTableViewCellDelegate {
 
     func tableViewCell(_ cell: TweetTableViewCell, didRetweet: Bool) {
 
-        let indexPath = tableView.indexPath(for: cell)!
-        let tweet = tweets[indexPath.row]
+        let tweet = cell.model!
 
         NetworkManager.shared.retweet(tweetID: tweet.idStr, retweet: didRetweet) {[weak self] (_, error) in
 
@@ -169,8 +175,7 @@ extension TweetsViewController: TweetTableViewCellDelegate {
 
     func tableViewCell(_ cell: TweetTableViewCell, didFavorite: Bool) {
 
-        let indexPath = tableView.indexPath(for: cell)!
-        let tweet = tweets[indexPath.row]
+        let tweet = cell.model!
 
         NetworkManager.shared.favorite(tweetID: tweet.idStr, favorite: didFavorite) { [weak self] (_, error) in
 
@@ -179,6 +184,15 @@ extension TweetsViewController: TweetTableViewCellDelegate {
                 self?.executeOnMain({self?.tableView.reloadData()})
             } else {
                 self?.displayAlert(title: "Unable to Perform Operation", message: error?.localizedDescription ?? "Remote API failed due to unknown reason.", completion: nil)
+            }
+        }
+    }
+
+    func tableViewCell(_ cell: TweetTableViewCell, displayProfileView: Bool) {
+
+        if displayProfileView {
+            if let user = cell.model.tweetOwner {
+                showProfileView(for: user)
             }
         }
     }

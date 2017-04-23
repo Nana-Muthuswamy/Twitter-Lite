@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: TimelineViewController {
+class ProfileViewController: TweetsViewController {
 
     var user = User.currentUser!
 
@@ -21,4 +21,39 @@ class ProfileViewController: TimelineViewController {
         tableView.tableHeaderView = headerView
     }
 
+    override func loadData() {
+        
+        NetworkManager.shared.fetchTimeline(forId: user.idStr, completion: { [weak self] (results, error) in
+
+            self?.refreshControl?.endRefreshing()
+
+            if error == nil && results != nil {
+                self?.tweets = results!
+            } else if error != nil {
+
+                let alertTitle: String
+                let alertMsg: String
+
+                switch error! {
+                case .failure(let msg):
+                    alertTitle = "Network Error"
+                    alertMsg = msg ?? "Unable to fetch data."
+                case .invalidData(_):
+                    alertTitle = "Invalid Data"
+                    alertMsg = "Unexpected data format returned"
+                }
+
+                self?.displayAlert(title: alertTitle, message: alertMsg, completion: nil)
+            }
+        })
+    }
+
+    override func tableViewCell(_ cell: TweetTableViewCell, displayProfileView: Bool) {
+        // Avoid seguing to profile view for the currently viewing user
+        if displayProfileView && (cell.model.tweetOwner?.idStr != user.idStr) {
+            if let user = cell.model.tweetOwner {
+                showProfileView(for: user)
+            }
+        }
+    }
 }

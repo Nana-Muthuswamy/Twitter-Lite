@@ -12,6 +12,7 @@ import FaveButton
 protocol TweetTableViewCellDelegate: class {
     func tableViewCell(_ cell: TweetTableViewCell, didRetweet: Bool)
     func tableViewCell(_ cell: TweetTableViewCell, didFavorite: Bool)
+    func tableViewCell(_ cell: TweetTableViewCell, displayProfileView: Bool)
 }
 
 class TweetTableViewCell: UITableViewCell {
@@ -66,6 +67,9 @@ class TweetTableViewCell: UITableViewCell {
 
     @IBAction func favorite(_ sender: FaveButton) {
         delegate?.tableViewCell(self, didFavorite: sender.isSelected)
+    }
+
+    @IBAction func tapProfileImageView(_ sender: UITapGestureRecognizer) {
     }
 
 }
