@@ -10,10 +10,15 @@ import Foundation
 
 class User {
 
+    var id: Int
+    var idStr: String
     var name: String?
     var screenName: String?
     var profileURL: URL?
     var tagline: String?
+    var tweetsCount: Int
+    var followingCount: Int
+    var followersCount: Int
 
     var dictionary: Dictionary<String, Any>!
 
@@ -21,6 +26,9 @@ class User {
 
         // Persist input dictionary for future use
         self.dictionary = dictionary
+
+        id = dictionary["id"] as! Int
+        idStr = dictionary["id_str"] as! String
 
         if let userName = dictionary["name"] as? String {
             name = userName
@@ -37,6 +45,11 @@ class User {
         if let userTagline = dictionary["description"] as? String {
             tagline = userTagline
         }
+
+        tweetsCount = dictionary["statuses_count"] as? Int ?? 0
+        followingCount = dictionary["friends_count"] as? Int ?? 0
+        followersCount = dictionary["followers_count"] as? Int ?? 0
+
     }
 
     private static var _currentUser: User?

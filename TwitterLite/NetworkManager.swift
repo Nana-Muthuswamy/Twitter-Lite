@@ -13,6 +13,7 @@ enum NetworkAPIError: Error {
     case failure(String?)
 }
 
+//fileprivate let userProfileURL = "1.1/users/show.json"
 fileprivate let userAccountURL = "1.1/account/verify_credentials.json"
 fileprivate let timelineURL = "1.1/statuses/home_timeline.json"
 fileprivate let mentionsURL = "1.1/statuses/mentions_timeline.json"
@@ -95,11 +96,6 @@ class NetworkManager: BDBOAuth1SessionManager {
             if let userDict = response as? Dictionary<String, Any> {
                 let user = User(dictionary: userDict)
 
-                print("Name: \(user.name!)")
-                print("Screen Name: \(user.screenName!)")
-                print("Description: \(user.tagline!)")
-                print("Profile Image: \(user.profileURL!)")
-
                 // Update the current user
                 User.currentUser = user
 
@@ -115,10 +111,32 @@ class NetworkManager: BDBOAuth1SessionManager {
         })
     }
 
+//    func fetchUserProfile(id: String, completion: @escaping ((User?, NetworkAPIError?) -> Void)) {
+//
+//        let params = ["user_id" : id]
+//
+//        // Fetch user's account profile
+//        self.get(userProfileURL, parameters: params, progress: nil, success: { (task, response) in
+//
+//            if let userDict = response as? Dictionary<String, Any> {
+//                print("User Profile: \(userDict)")
+//
+//                let user = User(dictionary: userDict)
+//                // Successful login completion
+//                completion(user, nil)
+//
+//            } else {
+//                completion(nil, NetworkAPIError.invalidData(response))
+//            }
+//
+//        }, failure: { (task, error) in
+//            completion(nil, NetworkAPIError.failure(error.localizedDescription))
+//        })
+//    }
+
     func fetchHomeTimeline(completion: @escaping (Array<Tweet>?, NetworkAPIError?) -> Void) {
 
         get(timelineURL, parameters: nil, progress: nil, success: { (task, response) in
-            print("HomeTimeLine 1: \(String(describing: response))")
 
             var tweets = Array<Tweet>()
 
@@ -137,7 +155,6 @@ class NetworkManager: BDBOAuth1SessionManager {
     func fetchMentionsTimeline(completion: @escaping (Array<Tweet>?, NetworkAPIError?) -> Void) {
 
         get(mentionsURL, parameters: nil, progress: nil, success: { (task, response) in
-            print("HomeTimeLine 1: \(String(describing: response))")
 
             var tweets = Array<Tweet>()
 

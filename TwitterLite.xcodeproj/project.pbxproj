@@ -16,6 +16,9 @@
 		391460721EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391460701EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift */; };
 		391460731EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391460711EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib */; };
 		391460751EABE11100A7F4FF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391460741EABE11100A7F4FF /* Message.swift */; };
+		391460771EAC073200A7F4FF /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391460761EAC073200A7F4FF /* ProfileHeaderView.swift */; };
+		391460791EAC075100A7F4FF /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391460781EAC075100A7F4FF /* ProfileHeaderView.xib */; };
+		3914607B1EAC116B00A7F4FF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914607A1EAC116B00A7F4FF /* ProfileViewController.swift */; };
 		398A35001EA1CB61006F3BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A34FF1EA1CB61006F3BCD /* AppDelegate.swift */; };
 		398A35021EA1CB61006F3BCD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A35011EA1CB61006F3BCD /* LoginViewController.swift */; };
 		398A35051EA1CB61006F3BCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 398A35031EA1CB61006F3BCD /* Main.storyboard */; };
@@ -41,6 +44,9 @@
 		391460701EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyTweetsTableViewCell.swift; sourceTree = "<group>"; };
 		391460711EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTweetsTableViewCell.xib; sourceTree = "<group>"; };
 		391460741EABE11100A7F4FF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		391460761EAC073200A7F4FF /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		391460781EAC075100A7F4FF /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+		3914607A1EAC116B00A7F4FF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		398A34FC1EA1CB61006F3BCD /* TwitterLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398A34FF1EA1CB61006F3BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398A35011EA1CB61006F3BCD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 			children = (
 				3914606E1EABCEF600A7F4FF /* Common */,
 				3914606A1EABC94800A7F4FF /* TimelineViewController.swift */,
+				3914607A1EAC116B00A7F4FF /* ProfileViewController.swift */,
 				3914606C1EABCEE200A7F4FF /* MentionsViewController.swift */,
 				39D94B3F1EA3597100EE8676 /* TweetDetailsViewController.swift */,
 				39D94B481EA487BB00EE8676 /* ComposeTweetViewController.swift */,
@@ -111,6 +118,8 @@
 				391460621EAACFD900A7F4FF /* TweetTableViewCell.xib */,
 				391460701EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift */,
 				391460711EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib */,
+				391460761EAC073200A7F4FF /* ProfileHeaderView.swift */,
+				391460781EAC075100A7F4FF /* ProfileHeaderView.xib */,
 				398A35031EA1CB61006F3BCD /* Main.storyboard */,
 				398A35081EA1CB61006F3BCD /* LaunchScreen.storyboard */,
 			);
@@ -248,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				391460731EABE0C100A7F4FF /* EmptyTweetsTableViewCell.xib in Resources */,
+				391460791EAC075100A7F4FF /* ProfileHeaderView.xib in Resources */,
 				398A350A1EA1CB61006F3BCD /* LaunchScreen.storyboard in Resources */,
 				398A35071EA1CB61006F3BCD /* Assets.xcassets in Resources */,
 				398A35051EA1CB61006F3BCD /* Main.storyboard in Resources */,
@@ -314,7 +324,9 @@
 				39D94B3A1EA291CD00EE8676 /* TweetsViewController.swift in Sources */,
 				39D94B381EA212B600EE8676 /* User.swift in Sources */,
 				390E53081EA1F91E00AF8F06 /* NetworkManager.swift in Sources */,
+				391460771EAC073200A7F4FF /* ProfileHeaderView.swift in Sources */,
 				39D94B3C1EA2D91100EE8676 /* Tweet.swift in Sources */,
+				3914607B1EAC116B00A7F4FF /* ProfileViewController.swift in Sources */,
 				3914606D1EABCEE200A7F4FF /* MentionsViewController.swift in Sources */,
 				391460721EABE0C100A7F4FF /* EmptyTweetsTableViewCell.swift in Sources */,
 				39D94B401EA3597100EE8676 /* TweetDetailsViewController.swift in Sources */,

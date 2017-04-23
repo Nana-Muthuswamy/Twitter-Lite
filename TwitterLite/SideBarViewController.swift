@@ -19,13 +19,13 @@ class SideBarViewController: UIViewController, UITableViewDataSource, UITableVie
 
         // Instantiate content view controllers
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        sideBarItemControllers.append(storyboard.instantiateViewController(withIdentifier: "TimelineNavController"))
+        sideBarItemControllers.append(storyboard.instantiateViewController(withIdentifier: "ProfileNavController"))
         sideBarItemControllers.append(storyboard.instantiateViewController(withIdentifier: "TimelineNavController"))
         sideBarItemControllers.append(storyboard.instantiateViewController(withIdentifier: "MentionsNavController"))
         sideBarItemControllers.append(storyboard.instantiateViewController(withIdentifier: "TimelineNavController"))
 
         // Set the initial content view controller to logged in user's Profile view controller
-        sideBarController?.setContentViewController(sideBarItemControllers[0])
+        sideBarController?.setContentViewController(sideBarItemControllers[1])
     }
 
     // MARK: - UITableViewDataSource
